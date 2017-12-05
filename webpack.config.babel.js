@@ -3,6 +3,7 @@ import { build } from 'mblock-webpack'
 import { join } from 'path'
 
 const appFolder = (folder) => join(__dirname, folder)
+const isDevelopment = process.env.NODE_ENV === 'development'
 
 // function to be called when webpack is called
 // we can pass variables from the command
@@ -12,7 +13,7 @@ export default (env = {source: 'src', output: 'dist'}) => {
   const environment = {
     sourcePath: appFolder(env.source),
     outputPath: appFolder(env.output),
-    port: process.env.NODE_ENV === 'development' ? 5000 : 8080,
+    port: isDevelopment ? 5000 : process.env.PORT,
     ...env
   }
 

@@ -38,7 +38,7 @@ export default class Root extends Component {
 
   get content() {
     return (
-      <Router>
+      <Router onUpdate={() => window.scrollTo(0, 0)}>
         {this.props.routes}
       </Router>
     );

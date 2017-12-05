@@ -1,6 +1,11 @@
+
 import Markdown from './views/Markdown'
 import NotFound from './views/NotFound'
-import { componentTypes } from '../site/map'
+
+export const componentTypes = {
+  Markdown: 'Markdown',
+  NotFound: 'NotFound'
+}
 
 const Unknown = () =>
   <div>

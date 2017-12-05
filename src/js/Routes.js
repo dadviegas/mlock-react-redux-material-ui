@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import SharedPage from "./common/Shared";
 import {RouteProps} from './helpers/RouteProps'
 import siteMap from '../site/map'
-import {getComponent} from './pages'
+import {getComponent} from './component.type'
 
 const Routes = (
   <Switch>
