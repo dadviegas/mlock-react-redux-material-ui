@@ -1,7 +1,6 @@
 import { use, setting } from 'mblock-webpack'
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin'
 
-
 use(setting({}, (options, setup) => {
   const { resolvePath } = setup.modules
 

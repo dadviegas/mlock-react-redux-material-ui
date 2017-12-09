@@ -1,5 +1,4 @@
-import { route } from "../../../js/route"
-import {  } from "../../../js/route"
+import { route } from '../../../js/route'
 
 export const home = route({
   icon: 'home',

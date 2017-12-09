@@ -1,4 +1,4 @@
-import './base'
+// import './base'
 import './entry'
 import './output'
 import './babel'

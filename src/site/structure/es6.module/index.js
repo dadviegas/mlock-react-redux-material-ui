@@ -1,4 +1,4 @@
-import { route } from "../../../js/route"
+import { route } from '../../../js/route'
 
 const es6ModuleOne = route({
   icon: 'es6ModuleOne',

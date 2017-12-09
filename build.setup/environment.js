@@ -1,6 +1,5 @@
 import { use, setting } from 'mblock-webpack'
-import { join } from 'path'
-var path = require("path")
+import path from 'path'
 
 const provideConf = {
   '__environment__': path.resolve(__dirname, '../src/environment')

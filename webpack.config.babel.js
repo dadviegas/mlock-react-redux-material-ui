@@ -1,4 +1,4 @@
-import "./build.setup"
+import './build.setup'
 import { build } from 'mblock-webpack'
 import { join } from 'path'
 

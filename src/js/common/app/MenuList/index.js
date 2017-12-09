@@ -1,13 +1,10 @@
 import React, { PureComponent } from 'react'
-import { Link, withRouter } from 'react-router-dom'
-import AppBar from 'material-ui/AppBar'
-import { Tabs, Tab } from 'material-ui/Tabs'
+import { withRouter } from 'react-router-dom'
 import Drawer from 'material-ui/Drawer'
 import List from 'material-ui/List'
-
+import siteMap from '../../../../site/map'
 const ListItem = List.ListItem
 
-import siteMap from '../../../../site/map'
 class MenuListComponent extends PureComponent {
   constructor (props) {
     super(props)
@@ -20,19 +17,12 @@ class MenuListComponent extends PureComponent {
 
   handleNestedListToggle = (item) => {
     this.setState({
-      isDrawerOpen: !item.state.isDrawerOpen,
+      isDrawerOpen: !item.state.isDrawerOpen
     })
   }
 
   onLinkClick = (item, hash) => {
     window.location.hash = `#${hash}`
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { location, history: { action } } = nextProps;
-    if (location !== this.props.location) {
-      window.scrollTo(0, 0)
-    }
   }
 
   buildItem = (items = [], route) => {
@@ -64,8 +54,8 @@ class MenuListComponent extends PureComponent {
     return items
   }
 
-  render(props) {
-    return <Drawer width={300} docked={false} className="app-drawer" open={this.props.open} onRequestChange={this.props.onRequestChange} >
+  render (props) {
+    return <Drawer width={300} docked={false} className='app-drawer' open={this.props.open} onRequestChange={this.props.onRequestChange} >
       <List>
         {this.buildMenu(siteMap)}
       </List>

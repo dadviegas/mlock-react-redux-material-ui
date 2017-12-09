@@ -1,5 +1,4 @@
 import { use, setting } from 'mblock-webpack'
-import { join } from 'path'
 
 const webpackConf = {
   module: {

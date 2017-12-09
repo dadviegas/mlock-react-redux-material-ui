@@ -1,3 +1,3 @@
-import { routes } from "./structure"
+import { routes } from './structure'
 
 export default routes

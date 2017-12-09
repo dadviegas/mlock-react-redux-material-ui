@@ -50,21 +50,21 @@ const markdown = function (markup) {
 }
 
 export default class HighlightCode extends Component {
-  mermaidInit() {
+  mermaidInit () {
     window.mermaid && window.mermaid.init(undefined, document.getElementsByClassName('mermaid'))
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.mermaidInit()
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     this.mermaidInit()
   }
 
-  render() {
+  render () {
     return (
-      <div dangerouslySetInnerHTML={markdown(this.props.source)}></div>
+      <div dangerouslySetInnerHTML={markdown(this.props.source)} />
     )
   }
 }

@@ -1,6 +1,4 @@
 import { use, setting } from 'mblock-webpack'
-import { join } from 'path'
-var path = require("path")
 
 const compressionConf = {
   asset: '[path].gz[query]'
@@ -13,13 +11,9 @@ use(
     return configuration.isDevelopment
       ? {}
       : {
-          plugins: [
-            new setup.plugins.CompressionPlugin(options)
-          ]
-        }
+        plugins: [
+          new setup.plugins.CompressionPlugin(options)
+        ]
+      }
   })
 )
-
-
-
-

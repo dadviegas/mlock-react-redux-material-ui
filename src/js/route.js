@@ -1,4 +1,4 @@
-import { componentTypes } from "./component.type"
+import { componentTypes } from './component.type'
 
 export const route = (options) => ({
   icon: '',

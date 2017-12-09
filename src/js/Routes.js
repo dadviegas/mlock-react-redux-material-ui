@@ -1,11 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { Switch, Route } from 'react-router-dom'
-import SharedPage from "./common/Shared";
+import { Switch } from 'react-router-dom'
+import SharedPage from './common/Shared'
 import {RouteProps} from './helpers/RouteProps'
 import siteMap from '../site/map'
-import {getComponent} from './component.type'
-import { route } from './route';
+import { getComponent } from './component.type'
 
 const routeBuilder = (routes, route) => {
   routes.push(<RouteProps

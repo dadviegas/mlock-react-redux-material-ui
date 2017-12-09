@@ -1,4 +1,4 @@
-import { route } from "../../js/route"
+import { route } from '../../js/route'
 import { home } from './home'
 import { es6Module } from './es6.module'
 
