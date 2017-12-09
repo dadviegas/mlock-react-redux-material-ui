@@ -3,29 +3,14 @@ import { Link, withRouter } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar'
 import { Tabs, Tab } from 'material-ui/Tabs'
 import Drawer from 'material-ui/Drawer'
-import RaisedButton from 'material-ui/RaisedButton'
+import List from 'material-ui/List'
 
-import IconButton from 'material-ui/IconButton'
-import IconMenu from 'material-ui/IconMenu'
-import MenuItem from 'material-ui/MenuItem'
-import FlatButton from 'material-ui/FlatButton'
-import Toggle from 'material-ui/Toggle'
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
-import NavigationClose from 'material-ui/svg-icons/navigation/close'
-import NavigationMenu from 'material-ui/svg-icons/navigation/menu'
+const ListItem = List.ListItem
 
-import { List, ListItem } from 'material-ui/List'
-import ContentInbox from 'material-ui/svg-icons/content/inbox'
-import ActionGrade from 'material-ui/svg-icons/action/grade'
-import ContentSend from 'material-ui/svg-icons/content/send'
-import ContentDrafts from 'material-ui/svg-icons/content/drafts'
-import Divider from 'material-ui/Divider'
-import ActionInfo from 'material-ui/svg-icons/action/info'
-
+import siteMap from '../../../../site/map'
 class MenuListComponent extends PureComponent {
   constructor (props) {
     super(props)
-    console.log(props)
     this.props = props
   }
 
@@ -50,53 +35,39 @@ class MenuListComponent extends PureComponent {
     }
   }
 
+  buildItem = (items = [], route) => {
+    const nested = []
+
+    if (route.nested) {
+      route.nested.map((route) => (
+        this.buildItem(nested, route)
+      ))
+    }
+
+    const it = <ListItem
+      key={route.path}
+      primaryText={route.name}
+      onClick={(item) => this.onLinkClick(item, route.path)}
+      nestedItems={nested}
+      />
+
+    items.push(it)
+  }
+
+  buildMenu = (siteMap) => {
+    const items = []
+
+    siteMap.map((route) => (
+      this.buildItem(items, route)
+    ))
+
+    return items
+  }
+
   render(props) {
-    return <Drawer width={300} openSecondary={false} open={this.props.open}>
+    return <Drawer width={300} docked={false} className="app-drawer" open={this.props.open} onRequestChange={this.props.onRequestChange} >
       <List>
-        <ListItem primaryText="Home" leftIcon={<ContentInbox />} onClick={(item) => this.onLinkClick(item, "home")} />
-        <ListItem primaryText="About" leftIcon={<ActionGrade />} onClick={(item) => this.onLinkClick(item, "about")} />
-        <ListItem primaryText="Sent mail" leftIcon={<ContentSend />} />
-        <ListItem primaryText="Drafts" leftIcon={<ContentDrafts />} />
-        <ListItem primaryText="Inbox" leftIcon={<ContentInbox />} />
-        <ListItem
-          primaryText="Inbox"
-          leftIcon={<ContentInbox />}
-          initiallyOpen={true}
-          primaryTogglesNestedList={true}
-          nestedItems={[
-            <ListItem
-              key={1}
-              primaryText="Starred"
-              leftIcon={<ActionGrade />}
-            />,
-            <ListItem
-              key={2}
-              primaryText="Sent Mail"
-              leftIcon={<ContentSend />}
-              disabled={true}
-              nestedItems={[
-                <ListItem key={1} primaryText="Drafts" leftIcon={<ContentDrafts />} />,
-              ]}
-            />,
-            <ListItem
-              key={3}
-              primaryText="Inbox"
-              leftIcon={<ContentInbox />}
-              open={this.state.isDrawerOpen}
-              onNestedListToggle={this.handleNestedListToggle}
-              nestedItems={[
-                <ListItem key={1} primaryText="Drafts" leftIcon={<ContentDrafts />} />,
-              ]}
-            />,
-          ]}
-        />
-      </List>
-      <Divider />
-      <List>
-        <ListItem primaryText="All mail" rightIcon={<ActionInfo />} />
-        <ListItem primaryText="Trash" rightIcon={<ActionInfo />} />
-        <ListItem primaryText="Spam" rightIcon={<ActionInfo />} />
-        <ListItem primaryText="Follow up" rightIcon={<ActionInfo />} />
+        {this.buildMenu(siteMap)}
       </List>
     </Drawer>
   }

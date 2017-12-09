@@ -10,15 +10,29 @@ const es6ModuleOne = route({
   }
 })
 
+const es6ModuleTwo = route({
+  icon: 'es6ModuleTwo',
+  name: 'ES6 - Module Two',
+  description: 'ES6 - Module Two',
+  path: '/es6/module-two',
+  payload: {
+    markdownFile: 'markdowntest.md'
+  },
+  nested: [
+    es6ModuleOne
+  ]
+})
+
 export const es6Module = route({
   icon: 'es6',
   name: 'ES6',
   description: 'ES6',
   path: '/es6',
   payload: {
-    markdownFile: 'default.md'
+    markdownFile: 'code/default.md'
   },
   nested: [
-    es6ModuleOne
+    es6ModuleOne,
+    es6ModuleTwo
   ]
 })

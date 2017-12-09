@@ -6,7 +6,7 @@ class Home extends React.Component {
     return (
       <div>
           <MenuRouter />
-          <div style={{ margin: 20, paddingTop: 64 }}>
+          <div style={{ margin: 20, paddingTop: 54 }}>
             {this.props.children}
           </div>
       </div>

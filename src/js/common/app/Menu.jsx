@@ -1,27 +1,32 @@
-import React, { PureComponent } from 'react'
-import { Link, withRouter } from 'react-router-dom'
-import AppBar from 'material-ui/AppBar'
-import {Tabs, Tab} from 'material-ui/Tabs'
-import Drawer from 'material-ui/Drawer'
-import RaisedButton from 'material-ui/RaisedButton'
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import IconButton from 'material-ui/IconButton';
+import MenuIcon from 'material-ui-icons/Menu';
+import AccountCircle from 'material-ui-icons/AccountCircle';
+import Switch from 'material-ui/Switch';
+import { FormControlLabel, FormGroup } from 'material-ui/Form';
+import Menu, { MenuItem } from 'material-ui/Menu';
 
-import IconButton from 'material-ui/IconButton'
-import IconMenu from 'material-ui/IconMenu'
-import MenuItem from 'material-ui/MenuItem'
-import FlatButton from 'material-ui/FlatButton'
-import Toggle from 'material-ui/Toggle'
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
-import NavigationClose from 'material-ui/svg-icons/navigation/close'
-import NavigationMenu from 'material-ui/svg-icons/navigation/menu'
-
-import {List, ListItem} from 'material-ui/List'
-import ContentInbox from 'material-ui/svg-icons/content/inbox'
-import ActionGrade from 'material-ui/svg-icons/action/grade'
-import ContentSend from 'material-ui/svg-icons/content/send'
-import ContentDrafts from 'material-ui/svg-icons/content/drafts'
-import Divider from 'material-ui/Divider'
-import ActionInfo from 'material-ui/svg-icons/action/info'
 import MenuList from "./MenuList";
+
+const styles = theme => ({
+  root: {
+    marginTop: theme.spacing.unit * 3,
+    width: '100%',
+  },
+  flex: {
+    flex: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+});
+
 class HeaderComponent extends PureComponent {
   state = {
     openApp: false,
@@ -49,17 +54,22 @@ class HeaderComponent extends PureComponent {
   }
 
   render () {
+    const { classes } = this.props;
+
     return <div>
-      <MenuList open={this.state.openApp} />
-      <AppBar
-        style={{ position: "fixed", top: 0 }}
-        title="DadViegas"
-        iconClassNameRight="muidocs-icon-navigation-expand-more"
-        onLeftIconButtonTouchTap={this.handleToggle}
-        >
+      <MenuList open={this.state.openApp} onRequestChange={this.handleToggle}/>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton className={classes.menuButton} color="contrast" aria-label="Menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography type="title" color="inherit" className={classes.flex}>
+            Title
+            </Typography>
+        </Toolbar>
       </AppBar>
     </div>
   }
 }
 
-export default withRouter(props => <HeaderComponent {...props} />)
+export default withStyles(styles)(HeaderComponent)

@@ -1,5 +1,11 @@
 @charset "UTF-8";
 @import "./variables";
+@import "./table";
+
+body, html {
+  margin: 0;
+  font-size: 14px;
+}
 
 .mermaid {
   margin: auto;
@@ -14,4 +20,32 @@
   background: #333;
   border-radius: 6px;
   margin: 16px;
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+}
+
+.hljs-subst {
+  color: black;
+}
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
 }
