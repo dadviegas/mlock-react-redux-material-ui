@@ -5,7 +5,7 @@ import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import IconButton from 'material-ui/IconButton'
 import MenuIcon from 'material-ui-icons/Menu'
-
+import Avatar from 'material-ui/Avatar'
 import MenuList from './MenuList'
 
 const styles = theme => ({
@@ -24,17 +24,10 @@ const styles = theme => ({
 
 class HeaderComponent extends PureComponent {
   state = {
-    openApp: false,
-    isDrawerOpen: false
+    openApp: false
   }
 
   handleToggle = () => this.setState({ openApp: !this.state.openApp })
-
-  handleNestedListToggle = (item) => {
-    this.setState({
-      isDrawerOpen: !item.state.isDrawerOpen
-    })
-  }
 
   onLinkClick = (item, hash) => {
     window.location.hash = `#${hash}`
@@ -52,15 +45,16 @@ class HeaderComponent extends PureComponent {
     const { classes } = this.props
 
     return <div>
-      <MenuList open={this.state.openApp} onRequestChange={this.handleToggle} />
+      <MenuList open={this.state.openApp} onRequestClose={this.handleToggle} />
       <AppBar position='static'>
         <Toolbar>
-          <IconButton className={classes.menuButton} color='contrast' aria-label='Menu'>
+          <IconButton className={classes.menuButton} color='contrast' aria-label='Menu' onClick={this.handleToggle}>
             <MenuIcon />
           </IconButton>
+          <Avatar alt='dadviegas' src='/icons-5844734a215bc272181149b289bda0bb/favicon-32x32.png' />
           <Typography type='title' color='inherit' className={classes.flex}>
-            Title
-            </Typography>
+            DadViegas
+          </Typography>
         </Toolbar>
       </AppBar>
     </div>

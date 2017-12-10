@@ -1,9 +1,19 @@
 import React, { PureComponent } from 'react'
-import { withRouter } from 'react-router-dom'
 import Drawer from 'material-ui/Drawer'
-import List from 'material-ui/List'
+import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List'
 import siteMap from '../../../../site/map'
-const ListItem = List.ListItem
+import { withStyles } from 'material-ui/styles'
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    background: theme.palette.background.paper
+  },
+  nested: {
+    paddingLeft: theme.spacing.unit * 4
+  }
+})
 
 class MenuListComponent extends PureComponent {
   constructor (props) {
@@ -15,33 +25,24 @@ class MenuListComponent extends PureComponent {
     isDrawerOpen: false
   }
 
-  handleNestedListToggle = (item) => {
-    this.setState({
-      isDrawerOpen: !item.state.isDrawerOpen
-    })
-  }
-
   onLinkClick = (item, hash) => {
     window.location.hash = `#${hash}`
+    this.props.onRequestClose()
   }
 
-  buildItem = (items = [], route) => {
-    const nested = []
-
-    if (route.nested) {
-      route.nested.map((route) => (
-        this.buildItem(nested, route)
-      ))
-    }
-
-    const it = <ListItem
+  buildItem = (items = [], route, nested = false) => {
+    const it = <ListItem button
+      className={nested ? this.props.classes.nested : {}}
       key={route.path}
-      primaryText={route.name}
-      onClick={(item) => this.onLinkClick(item, route.path)}
-      nestedItems={nested}
-      />
+      onClick={(item) => this.onLinkClick(item, route.path)} >
+      <ListItemText primary={route.name} />
+    </ListItem>
 
     items.push(it)
+
+    route.nested.map((route) => (
+      this.buildItem(items, route, true)
+    ))
   }
 
   buildMenu = (siteMap) => {
@@ -51,16 +52,16 @@ class MenuListComponent extends PureComponent {
       this.buildItem(items, route)
     ))
 
-    return items
+    return <List subheader={<ListSubheader> DAD VIEGAS </ListSubheader>}>
+      { items }
+    </List>
   }
 
   render (props) {
-    return <Drawer width={300} docked={false} className='app-drawer' open={this.props.open} onRequestChange={this.props.onRequestChange} >
-      <List>
-        {this.buildMenu(siteMap)}
-      </List>
+    return <Drawer width={300} className='app-drawer' open={this.props.open} onRequestClose={this.props.onRequestClose} >
+      {this.buildMenu(siteMap)}
     </Drawer>
   }
 }
 
-export default withRouter(props => <MenuListComponent {...props} />)
+export default withStyles(styles)(MenuListComponent)

@@ -3,8 +3,6 @@ import { home } from './home'
 import { es6Module } from './es6.module'
 
 export const routes = [
-  home,
-  es6Module,
   route({
     icon: 'home',
     name: 'Home',
@@ -31,5 +29,7 @@ export const routes = [
     payload: {
       markdownFile: 'code/default.md'
     }
-  })
+  }),
+  home,
+  es6Module
 ]
